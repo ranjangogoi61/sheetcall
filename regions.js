@@ -1,7 +1,3 @@
-GitHub pe is file ka naam aur jagah: **`regions.js`**
-
-Neeche wale block ko pura copy karke GitHub ke editor mein paste karo. Block ke upar copy ka button ho to wahi use karna — sabse safe hai. Haath se select kar rahe ho to teen backtick wali pehli aur aakhri line **mat** lena.
-
 ```js
 /**
  * CALL-E supported regions, generated from the official
