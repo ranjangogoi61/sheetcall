@@ -1,0 +1,10 @@
+{
+  "name": "sheetcall",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A workflow runtime for phone tasks, running on CALL-E. Rows in, real calls out, structured answers back.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
