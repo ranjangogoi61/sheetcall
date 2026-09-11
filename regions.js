@@ -1,4 +1,4 @@
-```js
+
 /**
  * CALL-E supported regions, generated from the official
  * CALL-E/call-e-integrations README country table.
@@ -54,4 +54,3 @@ const REGIONS = {
 };
 
 module.exports = { REGIONS };
-```
