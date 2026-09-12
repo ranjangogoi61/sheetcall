@@ -65,6 +65,19 @@ const DEFAULT_CONFIG = {
 
 const str = (v) => String(v === undefined || v === null ? '' : v).trim();
 
+// Maps the language names used in regions.js to their ISO 639-1 codes, so a
+// locale like "de-DE" or "zh-TW" can be checked against a region's supported
+// languages. The first two letters of the English name are NOT the ISO code
+// for most languages (German -> "ge" is wrong, it must be "de"), so this is
+// an explicit table rather than a slice(0, 2) guess.
+const LANGUAGE_ISO = {
+  arabic: 'ar', bengali: 'bn', chinese: 'zh', english: 'en', finnish: 'fi',
+  french: 'fr', german: 'de', hebrew: 'he', hindi: 'hi', japanese: 'ja',
+  malay: 'ms', polish: 'pl', portuguese: 'pt', sinhala: 'si', spanish: 'es',
+  tamil: 'ta', thai: 'th', turkish: 'tr', ukrainian: 'uk', urdu: 'ur',
+  vietnamese: 'vi'
+};
+
 /** Transition 1 — validate. Returns a blocking reason, or ''. */
 function validate(record, phoneCounts) {
   const phone = str(record.phone_e164);
@@ -88,7 +101,9 @@ function validate(record, phoneCounts) {
   }
   if (locale) {
     const lang = locale.split('-')[0].toLowerCase();
-    const supported = REGIONS[region].languages.map((l) => l.slice(0, 2).toLowerCase());
+    const supported = REGIONS[region].languages.map(
+      (l) => LANGUAGE_ISO[l.toLowerCase()] || l.slice(0, 2).toLowerCase()
+    );
     if (!supported.includes(lang)) {
       return `CALL-E supports ${REGIONS[region].languages.join('/')} for ${region}` +
              ` — locale ${locale} is not available`;
@@ -243,3 +258,4 @@ module.exports = {
   validate, eligibility, buildPayload, classify,
   validateAgainstSchema, isTerminal, interpolate, maskPhone, str
 };
+    
